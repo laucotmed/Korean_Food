@@ -1,0 +1,608 @@
+/* TIPOGRAFÍAS */
+
+@font-face { font-family: BetterSweet; src: url('/src/font/Better\ Sweet.ttf'); }
+@font-face { font-family: GamjaFlower-Regular; src: url('/src/font/GamjaFlower-Regular.ttf'); }
+
+/* COLORES Y TIPOGRAFÍAS ROOT */
+
+/* en el root vamos a indicar los colores y tipografías que usaremos en toda la web, para poder modificar fácilmente alguno de ellos si queremos */
+
+:root {
+    --accent-orange: #F1AA00;
+    --body-gray: #C2C2C2;
+    --title-white:#F1F1F1;
+    --header-font: GamjaFlower-Regular;
+    --body-font: BetterSweet;
+}
+
+/* usamos este selector universal para hacer que todos los tamaños del documento tengan en cuenta el padding */
+
+*{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* le quitamos el margin y el padding al body para evitar bordes blancos indeseados e indicamos que el scroll-behavior sea smooth para un scroll vertical más suave*/
+html, body{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    height: 100%;
+    width: 100%;
+}
+
+/* BACKGROUND */
+
+body{
+    background-image: url(/src/img/background.png);
+}
+
+/* MENÚ PRINCIPAL */
+
+/* le damos un ancho de 100% al menú para que ocupe toda la parte de arriba de nuestra web. Con fixed y top le indicamos que se coloque en la parte superior, y además, le añadimos un z-index para que el menú siempre se vea por delante del resto de contenido */
+
+.menu{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+/* usamos flex para que los elementos de la lista queden en línea, y con justify-content y align-items los centramos y separamos dejando espacios entre ellos. Eliminamos los puntos, el padding-inline-start, margin-block-start y margin-block-end que tienen los ul por defecto. Webkit para compatibilidad*/
+
+.menu_items{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    list-style-type: none;
+    -webkit-padding-start: 0;
+            padding-inline-start: 0;
+    -webkit-margin-before: 0;
+            margin-block-start: 0;
+    -webkit-margin-after: 0;
+            margin-block-end: 0;
+}
+
+/* le quitamos el underline al link y modificamos su aspecto. También usamos display:block para que este elemento ocupe todo su espacio */
+
+.menu_items li a{
+    text-decoration: none;
+    color:var(--body-gray);
+    font-family: var(--body-font), var(--header-font);
+    font-size: 1.7em;
+    text-transform: uppercase;
+    display: block;
+    padding: 1em;
+}
+
+/*  esto es para cambiar el color de los elementos del menú cuando el ratón pasa por encima, con una pequeña transición para que no quede muy brusco y webkit para evitar problemas de compatibilidad*/
+
+.menu_items li a:hover{
+    color:var(--accent-orange);
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+
+/* CLASE ACTIVE */
+
+/* esto cambia el color del elemento del menú que esté activo, es decir, del nombre de la página en la que se encuentre el usuario */
+
+li.active, li.active a{
+    color: var(--accent-orange);
+}
+
+/* con esto agregamos el círculo que rodea al elemento del menú cuando este tenga la clase active */
+
+li.active{
+    background-image: url('/src/img/selected.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    color: var(--accent-orange);
+}
+
+/* BOTÓN MENÚ HAMBURGUESA */
+
+/* modificamos el tamaño y el color del botón del menú y el cursor, para indicarle al usuario que puede hacer clic en el botón para ver el menú. Lo ocultamos con display:none para que aparezca al llegar a cierto tamaño*/
+
+.menu_button{
+    font-size: 1.7em;
+    color:var(--title-white);
+    cursor: pointer;
+    display: none;
+}
+
+/* esta clase nos permite mostrar/ocultar el menú al hacer clic sobre el botón */
+
+ul.show{
+    top:0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* CONTENEDORES SCROLL HORIZONTAL */
+
+/* Le damos un tamaño que ocupe toda la pantalla al contenedor padre wrapper, haciendo que el ancho sean 100vh y la altura 100vw. Rotamos el contenedor unos 270 grados y posicionamos con translateX y transform-origin, haciendo que el punto de origen sea arriba a la izquierda. Webkit para compatibilidad*/
+
+#wrapper{
+    width: 100vh;
+    height: 100vw;
+    -webkit-transform: rotate(270deg) translateX(-100%);
+    -ms-transform: rotate(270deg) translateX(-100%);
+            transform: rotate(270deg) translateX(-100%);
+    -webkit-transform-origin: top left;
+    -ms-transform-origin: top left;
+            transform-origin: top left;
+
+    /*le damos una posición absoluta para que quede en el sitio y hacemos que todo el contenido que se salga del eje x esté ahora escondido. Ocultamos la scrollbar, que quita espacio al contenido y no es muy estético que quede en la parte superior. Para evitar problemas de compatibilidad, añadimos también el selector webkit-scrollbar */
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: absolute;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    /* con esto logramos que la transición de hacer scroll entre un slider y otro sea con un efecto de "snap" */
+
+    -ms-scroll-snap-type: y mandatory;
+    scroll-snap-type: y mandatory;
+    scroll-snap-align: center;
+}
+
+::-webkit-scrollbar {
+    display:none;
+}
+
+/*  Para juntar todos los sliders, hacemos que su padre container tenga display: flex y de ancho mida lo que ocupan los sliders en total. Rotamos todo el contenedor también unos 90 grados y posicionamos con translateY y transform-origin, haciendo que el punto de origen sea arriba a la izquierda. Webkit para compatibilidad.*/
+
+
+#container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    width: 1950%;
+    -webkit-transform: rotate(90deg) translateY(-100vh);
+        -ms-transform: rotate(90deg) translateY(-100vh);
+            transform: rotate(90deg) translateY(-100vh);
+    white-space: nowrap;
+    -webkit-transform-origin: top left;
+        -ms-transform-origin: top left;
+            transform-origin: top left;
+}
+
+/* Le damos un tamaño de forma que cada slider ocupe toda la pantalla y agregamos display flex y scroll-snap-align:start para que el slider se "pegue" en el centro. Webkit para compatibilidad*/
+
+.slider {
+    width: 100vw;
+    height: 100vh;
+    scroll-snap-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+}
+
+/* SECCIONES */
+
+/* cada slider tiene una sección para facilitar la identificación en la navegación y para tener un estilo común. Webkit para compatibilidad */
+
+section{
+    width: 100%;
+    height: 90%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack:space-evenly;
+        -ms-flex-pack:space-evenly;
+            justify-content:space-evenly;
+    -webkit-box-align:center;
+        -ms-flex-align:center;
+            align-items:center;
+}
+
+/* SECCIÓN HOME */
+
+/* hacemos un cálculo para el tamaño que queremos para el título principal de la Home con clamp y le añadimos una sombra para que resalte sobre el fondo y parezca que hay profundidad*/
+
+#main_title h1{
+    font-size: clamp(6rem, calc(6rem + ((1vw - 0.48rem) * 5.5556)), 10rem);
+    min-height: 0vw;
+    font-family: var(--header-font);
+    color: var(--title-white);
+    text-shadow: -5px 10px 10px black;
+}
+
+/* a la imagen principal le añadimos una sombra para que destaque del fondo también, y le damos un tamaño grande para que sea impactante verla en pantallas grandes. Webkit para compatibilidad*/
+
+#main_img img{
+    -webkit-filter: drop-shadow(-10px 10px 5px black);
+    filter: drop-shadow(-10px 10px 5px black);
+    width: 100%;
+    max-width: 60em;
+    height: auto;
+}
+
+/* ESTRUCTURA SECCIONES */
+
+/* contenedor para las imágenes con flex y ocupando la mitad del espacio. Webkit para compatibilidad */
+
+.body_img{
+    width: 50%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+/* estilo para las imágenes que acompañan al texto, con una sombra para dar sensación de profundidad. Webkit para compatibilidad */
+
+.body_img img{
+    width: 100%;
+    -webkit-filter: drop-shadow(-10px 10px 5px black);
+    filter: drop-shadow(-10px 10px 5px black);
+}
+
+/* contenedor para los textos con flex y en column y ocupando 49% del espacio. Webkit para compatibilidad */
+
+.body_text{
+    width: 49%;
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+ }
+
+/* títulos y textos de los sliders. Hacemos un cálculo para el tamaño que queremos, quitamos los margin-block que traen por defecto y usamos word-wrap, white-space y text-justify para que el texto no se salga de su contenedor. Webkit para compatibilidad*/
+
+.body_text h1{
+    font-size: clamp(1.7rem, calc(1.7rem + ((1vw - 0.48rem) * 1.8056)), 3rem);
+    min-height: 0vw;
+    font-family: var(--body-font),var(--header-font);
+    color: var(--title-white);
+    text-align: center;
+    text-transform: uppercase;
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+    word-wrap: break-word;
+    white-space: pre-line;
+}
+
+.body_text p{
+    font-size: clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 1.1111)), 2rem);
+    min-height: 0vw;
+    font-family: var(--body-font), var(--header-font);
+    color: var(--body-gray);
+    word-wrap: break-word;
+    white-space: pre-line;
+    padding: 1em;
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+    text-justify: inter-word;
+}
+
+/* con esto podemos destacar en color naranja ciertas partes del texto */
+
+.body_text span{
+    color: var(--accent-orange);
+}
+
+/* BORDE "HANDPAINTED" GIF */
+
+/* Contenedor que tendrá la imagen y se usará de referencia para colocar el borde al GIF. Webkit para compatibilidad*/
+
+.frame{
+    position: relative;
+    display: block;
+    width: 70%;
+    background-color: transparent;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+
+/* Modificamos un poco el tamaño del GIF para que se ajuste mejor */
+
+.body_img>.frame>img{
+    width: 96%;
+    height: 90%;
+}
+
+/* Usamos la pseudoclase ::before para mostrar el borde delante del GIF, de forma que aparezca su alrededor, como si fuera un borde */
+
+.frame::before{
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    padding: 0;
+    background-image: url(/src/img/frame.png);
+    background-size: 100% 110%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+/* SECCIÓN DISHES */
+
+/* Rotamos la imagen de Side Dishes para romper un poco la monotonía de la web. Webkit para compatibilidad */
+
+#dishes .body_img{
+    -webkit-transform: rotate(30deg);
+        -ms-transform: rotate(30deg);
+            transform: rotate(30deg);
+}
+
+/* Ajustamos tamaños */
+
+#dishes .body_img img{
+    width: 90%;
+}
+
+#dishes2 .body_img img{
+    width: 80%;
+}
+
+
+/* SECCIÓN RECIPES */
+
+#recipes .body_text{
+    text-align: center;
+    width: 100%;
+}
+
+#recipes .body_img{
+    width: 100%;
+}
+
+/* Para ordenar las tres tarjetas, usamos un grid con tres columnas de 1fr cada una e indicando con clases y grid-template-areas dónde se colocan cada una. Webkit para compatibilidad */
+
+#recipes{
+    display: -ms-grid;
+    display: grid; 
+    -ms-grid-columns: 1fr 20px 1fr 20px 1fr; 
+    grid-template-columns: repeat(3,1fr);
+    gap: 0px 20px; 
+    grid-template-areas: 
+      "recipe_one recipe_two recipe_three"
+    ; 
+}
+
+.recipe_one { grid-area: recipe_one; }
+.recipe_two { grid-area: recipe_two; }
+.recipe_three { grid-area: recipe_three; }
+
+/* Usamos una máscara alpha para darle un aspecto irregular a nuestro botón y también una pequeña transición al hacer :hover, usando webkit para evitar problemas de compatibilidad con los navegadores. Webkit para compatibilidad */
+
+#recipes button{
+    font-size: clamp(1.2rem, calc(1.2rem + ((1vw - 0.48rem) * 1.1111)), 2rem);
+    font-family: var(--header-font);
+    padding: 0.5em;
+    background-color: black;
+    color: var(--title-white);
+    -webkit-mask-image:url(/src/img/button-mask.svg);
+            mask-image:url(/src/img/button-mask.svg);
+    mask-mode: alpha;
+    -webkit-mask-size:100% 100%;
+            mask-size:100% 100%;
+    -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+    margin-bottom: 2em;
+    -webkit-transition: font-size .4s;
+    -o-transition: font-size .4s;
+    transition: font-size .4s;
+}
+
+#recipes button:hover{
+    background-color: var(--accent-orange);
+    color: black;
+    font-size: clamp(1.4rem, calc(1.4rem + ((1vw - 0.48rem) * 1.1111)), 2.2rem);
+    min-height: 0vw;
+    cursor: pointer;
+}
+
+/* Contenedor que tiene de fondo la imagen de la tarjeta. Webkit para compatibilidad */
+
+.recipe_card{
+    width: 95%;
+    background-image: url(/src/img/card_bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    text-align: center;
+    -webkit-filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.6));
+}
+
+/* Imagen de la tarjeta con un poco de sombra. Webkit para compatibilidad  */
+
+.recipe_card img{
+    width: 100%;
+    -webkit-filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.6));
+    filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.6));
+}
+
+/* Modificamos el color del texto de las tarjetas para que se puedan ver sobre el fondo blanco */
+
+.recipe_card .body_text h1{
+    color: rgb(14, 14, 14);
+}
+
+.recipe_card .body_text p{
+    color: rgb(14, 14, 14);
+}
+
+
+
+/* MEDIA QUERY */
+
+/* TAMAÑO PARA MÓVILES Y IPAD */
+
+@media screen and (min-width:280px) and (max-width:820px) {
+
+    /* MENÚ RESPONSIVE: APARECE ICONO */
+  
+    .menu_button{
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        margin: 0.7em;
+        z-index: 3;
+        position: fixed;
+    }
+
+    .menu_items{
+        /* le ponemos una posición fija porque queremos hacer una pequeña animación en la que el menú salga desde arriba. Webkit para compatibilidad*/
+        position: fixed;
+        top: -110vh;
+        -webkit-transition: all .4s;
+        -o-transition: all .4s;
+        transition: all .4s;
+
+        /* también cambiamos la dirección del flex-direction a column para que los elementos del menú salgan en columna y ocupando toda la pantalla. Webkit para compatibilidad */
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(34, 34, 34, 0.774);
+        text-align: center;
+    }
+
+    .menu_items li a{
+        font-size: 2em;
+    }
+
+    /* CAMBIO A SCROLL VERTICAL */
+
+    /* cambiamos las propiedades a su estado original/inicial para poder hacer un scroll vertical. Webkit para compatibilidad*/
+    #wrapper{
+        width:auto;
+        height:auto;
+        -webkit-transform: initial;
+            -ms-transform: initial;
+                transform: initial;
+        -webkit-transform-origin: initial;
+            -ms-transform-origin: initial;
+                transform-origin: initial;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        position: initial;
+        scrollbar-width: initial;
+        -ms-overflow-style: initial;
+        -ms-scroll-snap-type:none;
+            scroll-snap-type:none;
+        scroll-snap-align: none;
+    }
+
+    #container{
+        -webkit-transform: initial;
+            -ms-transform: initial;
+                transform: initial;
+        width: auto;
+        display: initial;
+    }
+
+  /*   hacemos que el contenido de los sliders ahora tenga flex-direction column, para que todo se vea en columna. Webkit para compatibilidad */
+
+    .slider{
+        height: auto;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        padding-bottom: 2em;
+        padding-top: 2em;
+    }
+
+    section{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+
+    /* modificamos los tamaños de los contenedores de texto e imágenes de los sliders */
+
+    .body_text{
+        width: 100%;
+    }
+
+    .body_img{
+        width: 80%;
+    }
+
+    /* devolvemos la imagen que estaba girada a su posición original. Webkit para compatibilidad */
+
+    #dishes .body_img {
+        -webkit-transform:initial;
+            -ms-transform:initial;
+                transform:initial;
+    }
+
+    /* cambiamos el display:grid de las tarjetas por un display:flex en columna y hacemos que las tarjetas ocupen un 60% para dejar espacio a los lados. Webkit para compatibilidad */
+
+    #recipes{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+
+    .recipe_card{
+        width: 60%;
+    }
+}

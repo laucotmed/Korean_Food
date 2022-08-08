@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Etiquetas meta sobre el sitio web -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Proyecto Final para el módulo de Diseño Web, Javascript y HTML5 de la Escuela de Diseño CEI. Temática: Comida Coreana">
+    <meta name="keywords" content="South, Korea, Food, Recipe, Cuisine, Dish, Dishes, Korean">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Laura Cote Medina">
+
+    <!-- Icono Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="./src/img/south-korea-icon.png">
+
+    <!-- Iconos Font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Enlaces a la hoja de estilo y al script -->
+    <link rel="stylesheet" href="./style/style.css">
+    <script defer src="/script/script.js"></script>
+    <title>Korean Food</title>
+</head>
+<body>
+   <!--  Menú principal -->
+    <nav class="menu">
+        <ul class="menu_items">
+            <li class="menu_item homeNavItem"><a href="#home">Home</a></li>
+            <li class="menu_item historyNavItem"><a href="#history">History</a></li>
+            <li class="menu_item dishesNavItem"><a href="#dishes">Dishes</a></li>
+            <li class="menu_item recipesNavItem"><a href="#recipes">Recipes</a></li>
+        </ul>
+
+        <!-- Icono que mostrará el menú cuando el tamaño sea lo suficientemente pequeño -->
+        <span class="menu_button">
+            <i class="fas fa-bars"></i>
+        </span>
+    </nav>
+
+    <!-- Contenedores principales de la página web y sliders -->
+   
+    <div id="wrapper">
+        <div id="container">
+
+            <!-- Primer slider: Home -->
+            <div class="slider one">
+                <section class="home" id="home">
+                    <div id="main_title"><h1>한국 음식</h1></div>
+                    <div id="main_img"> <img src="./src/img/header_img.png" alt="Bibimbap"> </div>
+                </section>
+            </div>
+
+            <!-- Segundo slider: History -->
+            <div class="slider two">
+                <section class="history" id="history">
+                    <div class="body_text">
+                        <h1>History</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p><span>South Korean cuisine</span> has evolved through the centuries. It reflects a complex interaction of the natural environment and different cultural trends.</p>
+                        <p> It is largely based on <span>rice, vegetables, seafood and meats.</span> Ingredients and dishes vary by province.</p>
+                    </div>
+                    <div class="body_img"> <img src="./src/img/South-Korea-Map-Flag.svg" alt="South Korea Map"> </div>
+                </section>
+            </div>
+
+            <!-- tercer slider: Korean Food Today -->
+            <div class="slider three">
+                <section class="history" id="history2">
+                    <div class="body_text">
+                        <h1>Korean Food Today</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p>The rice consumption <span>has decreased</span> from 1985 because people rush toward <span>processed foods and instant foods</span>. Fast food chains have already become part of modern food culture in Korea.</p>
+                        <p>Despite this, Koreans keep a <span>successful balance</span> between both cultures (traditional and western). </p>
+                    </div>
+                    <div class="body_img"> <div class="frame"> <img src="./src/img/ramen.gif" alt="Fast Food GIF">  </div></div>
+                </section>
+            </div>
+
+            <!-- cuarto slider: Welcome -->
+            <div class="slider four">
+                <section class="history" id="history3">
+                    <div class="body_img"> <img src="./src/img/Samgyeopsal.png" alt="South Korea Map"> </div>
+                    <div class="body_text">
+                        <h1>Welcome to Korean Cuisine</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p>Each dish contains a <span>story & a taste</span> to identify its purpose. There is a philosophy koreans believe in that <span>"food & medicine come from the same root"</span>. With this, we introduce you a world of culinary cuisine of a 5,000 year history.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- quinto slider: Side dishes -->
+            <div class="slider five">
+                <section class="dishes" id="dishes">
+                    <div class="body_text">
+                        <h1>Side dishes</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p><span>Banchan</span> are a variety of side dishes that are meant to be shared together</span>. Each dish serves a small <span></span>purpose of accompanying the main dish. </p>
+                        <p>Because <span>each region</span> of Korea produce <span>different kinds of vegetables</span>, they are <span>100 kinds of varieties</span> so far.</p>
+                    </div>
+                    <div class="body_img"> <img src="./src/img/banchan.png" alt="South Korea Map"> </div>
+                </section>
+            </div>
+
+            <!-- sexto slider: Main dishes -->
+            <div class="slider six">
+                <section class="dishes" id="dishes2">
+                    <div class="body_img"> <img src="./src/img/Kimchi_jjigae.png" alt="South Korea Map">
+                    </div>
+                    <div class="body_text">
+                        <h1>Main Dishes</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p>Korean cuisine is known for having some of the <span>healthiest foods on the menu</span>. The dishes are simple but have pungent flavors and odors.</p>
+                        <p>Some more <span>famous Korean foods</span> and dishes are <span>Bulgogi</span> (Korean beef barbecue), <span>Samgyeopsal</span> (grilled pork belly), <span>Bibimbap</span> (bowl of rice, vegetables and meat) or <span>Kimchi Jjigae</span> (Kimchi Stew). </p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- séptimo slider: Desserts -->
+            <div class="slider seven">
+                <section class="dishes" id="dishes3">
+                    <div class="body_img"> <img src="./src/img/hotteok.png" alt="South Korea Map"> </div>
+                    <div class="body_text">
+                        <h1>Desserts</h1>
+                        <div><img src="/src/img/separator.svg" alt="separator"></div>
+                        <p>Typical Korean sweets are <span>not as abundant</span> as in Europe. They are quite <span>expensive</span> compared to other types of products.</p>
+                        <p>However, most of them are really <span>popular</span>, like <span>Hotteok</span> or <span>Bingsu</span>.</p>
+                    </div>
+                    <div class="body_img"> <img src="./src/img/bingsu.png" alt="South Korea Map"> </div>
+                </section>
+            </div>
+
+            <!-- octavo slider: Recipes -->
+            <div class="slider eight">
+                <section class="recipes" id="recipes">
+
+                    <!-- Recipe Bibimbap -->
+                    <div class="recipe_card recipe_one">
+                        <div class="body_img"><img src="./src/img/bibimbap.png" alt="Bibimbap Recipe"></div>
+                        <div class="body_text">
+                            <h1>Bibimbap</h1>
+                            <a href="https://youtu.be/0w0pIP6Y0cQ" target=”_blank”><button>See recipe</button></a>
+                        </div>
+                    </div>
+
+                    <!-- Recipe Bulgogi -->
+                    <div class="recipe_card recipe_two">
+                        <div class="body_img"><img src="./src/img/bulgogi.png" alt="Bulgogi Recipe"></div>
+                        <div class="body_text">
+                            <h1>Bulgogi</h1>
+                            <a href="https://youtu.be/3qBjL_HGvco?t=4" target=”_blank”><button>See recipe</button></a>
+                        </div>
+                    </div>
+
+                    <!-- Recipe Bulgogi -->
+                    <div class="recipe_card recipe_three">
+                        <div class="body_img"><img src="./src/img/dakgangjeong.png" alt="Dakgangjeong Recipe"></div>
+                        <div class="body_text">
+                            <h1>Dakgangjeong</h1>
+                            <a href="https://youtu.be/wZjJvTdKY2o" target=”_blank”><button>See recipe</button></a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
